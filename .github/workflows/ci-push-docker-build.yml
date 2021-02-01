@@ -1,27 +1,54 @@
-name: Pull CD Build Test For Docker Image
+name: Push CI Build Test For Docker Image
 
 on:
   push:
-    branches:
+    branches-ignore:
       - master
 
 jobs:
-  pullCdBuildDockerImage:
+  pushCiBuildDockerImage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Set Tag Name
+        id: get_tag_name
+        run: echo ::set-output name=tag_name::$(echo ${GITHUB_REF##*/})
+      - name: Capture environment variables
+        run: printenv
       - name: Check if there are conflicts when local merging master
         id: local_merge_master
         run: git merge origin/master
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       - name: Build Terraform Docker Image
         id: build_terraform_docker_image
+        uses: docker/build-push-action@v2
+        with:
+          buil-args: |
+            IMAGE_TAG=0.0.1
+            STEP_1_IMAGE=golang:1.15.6-alpine3.12
+            STEP_2_IMAGE=alpine:3.12
+            TERRAFORM_VERSION=0.14.5
+            AZURE_CLI_VERSION=2.16.0
+          file: Dockerfile
+          tags: |
+            danielscholl/terraform-azure:latest
+            danielscholl/terraform-azure:${{ steps.get_tag_name.outputs.tag_name }}
+      - name: Push to docker hub
         run: |
-          make \
-            STEP_1_IMAGE="golang:1.14.1-alpine3.11" \
-            STEP_2_IMAGE="alpine:3.11" \
-            TERRAFORM_VERSION=0.14.4 \
-            AZURE_CLI_VERSION=2.16.0 \
-            docker-build
+          docker push danielscholl/terraform-azure:latest
+          docker push danielscholl/terraform-azure:${{ steps.get_tag_name.outputs.tag_name }}
+      - name: Update Docker Hub Description
+        uses: peter-evans/dockerhub-description@v2.4.1
+        if: success()
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          repository: danielscholl/terraform-azure
+          readme-filepath: README.md
   logPullCdBuildDockerImage:
     needs: pullCdBuildDockerImage
     if: always()

@@ -1,5 +1,6 @@
-ARG STEP_1_IMAGE=golang:1.14.1-alpine3.11
-ARG STEP_2_IMAGE=alpine:3.11
+ARG STEP_1_IMAGE=golang:1.15.6-alpine3.12
+ARG STEP_2_IMAGE=alpine:3.12
+ARG IMAGE_TAG=0.0.0
 
 FROM ${STEP_1_IMAGE} AS STEP_1
 
@@ -33,7 +34,7 @@ FROM ${STEP_2_IMAGE} AS STEP_2
 ARG AZURE_CLI_VERSION=2.16.0
 
 LABEL Name="danielscholl/docker-terrraform-azure" \
-  Version="1.0.0"
+  Version=${IMAGE_TAG}
 
 # Copy from Step 1
 COPY --from=STEP_1 /go/bin/terraform /usr/bin/terraform
