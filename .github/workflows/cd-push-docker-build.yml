@@ -48,7 +48,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           repository: danielscholl/terraform-azure
-          readme-filepath: README.md
+          readme-filepath: Readme.md
   logPullCdBuildDockerImage:
     needs: pushCdBuildDockerImage
     if: always()
