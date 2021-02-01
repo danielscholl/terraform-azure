@@ -3,7 +3,8 @@ ARG STEP_2_IMAGE=alpine:3.11
 
 FROM ${STEP_1_IMAGE} AS STEP_1
 
-ARG TERRAFORM_VERSION=0.12.20
+ARG TERRAFORM_VERSION=0.14.5
+ARG AZURE_CLI_VERSION=2.16.0
 
 ENV BUILD_PACKAGES \
   bash \
@@ -29,42 +30,43 @@ RUN git clone https://github.com/hashicorp/terraform.git ./ \
 
 FROM ${STEP_2_IMAGE} AS STEP_2
 
+ARG AZURE_CLI_VERSION=2.16.0
+
 LABEL Name="danielscholl/docker-terrraform-azure" \
   Version="1.0.0"
 
 # Copy from Step 1
 COPY --from=STEP_1 /go/bin/terraform /usr/bin/terraform
 
-# ENV BASE_PACKAGES \
-#   gettext \
-#   git \
-#   bash \
-#   curl \
-#   make \
-#   ncurses \
-#   tar \
-#   openssh-client \
-#   sshpass \
-#   py-pip \
-#   python3
+ENV BASE_PACKAGES \
+  gettext \
+  git \
+  bash \
+  curl \
+  make \
+  ncurses \
+  tar \
+  openssh-client \
+  sshpass \
+  py-pip \
+  python3
 
-# RUN apk --update add --virtual build-dependencies \
-#   gcc \
-#   musl-dev \
-#   libffi-dev \
-#   openssl-dev \
-#   python3-dev
+RUN apk --update add --virtual build-dependencies \
+  gcc \
+  musl-dev \
+  libffi-dev \
+  openssl-dev \
+  python3-dev
 
-# RUN set -x \
-#   && apk update && apk upgrade \
-#   && apk add --no-cache ${BASE_PACKAGES} \
-#   && python3 -m pip install --upgrade pip \
-#   && python3 -m pip install \
-#   azure-cli \
-#   && apk del build-dependencies \
-#   && rm -rf /var/cache/apk/* \
-#   && rm /usr/bin/python \
-#   && ln -s /usr/bin/python3 /usr/bin/python
+RUN set -x \
+  && apk update && apk upgrade \
+  && apk add --no-cache ${BASE_PACKAGES} \
+  && python3 -m pip install --upgrade pip \
+  && python3 -m pip install --no-cache-dir azure-cli==${AZURE_CLI_VERSION} \
+  && apk del build-dependencies \
+  && rm -rf /var/cache/apk/* \
+  && rm /usr/bin/python \
+  && ln -s /usr/bin/python3 /usr/bin/python
 
 # Create Terraform User
 RUN addgroup -S terraform && adduser -S terraform -G terraform

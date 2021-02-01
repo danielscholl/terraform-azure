@@ -40,6 +40,7 @@ DOCKER_IMAGE_NAME := $(GIT_REPOSITORY_NAME)
 # -----------------------------------------------------------------------------
 
 TERRAFORM_VERSION ?= 0.14.5
+AZURE_VERSION ?= 2.16.0
 
 # -----------------------------------------------------------------------------
 # FUNCTIONS
@@ -58,6 +59,7 @@ docker-build: docker-rmi-for-build
 		--build-arg STEP_1_IMAGE=$(STEP_1_IMAGE) \
 		--build-arg STEP_2_IMAGE=$(STEP_2_IMAGE) \
 		--build-arg TERRAFORM_VERSION=$(TERRAFORM_VERSION) \
+    --build-arg AZURE_CLI_VERSION=$(AZURE_CLI_VERSION) \
 		--tag $(DOCKER_IMAGE_NAME) \
 		--tag $(DOCKER_IMAGE_NAME):$(GIT_VERSION) \
 		.
@@ -70,6 +72,7 @@ docker-build-development-cache: docker-rmi-for-build-development-cache
 		--build-arg STEP_1_IMAGE=$(STEP_1_IMAGE) \
 		--build-arg STEP_2_IMAGE=$(STEP_2_IMAGE) \
 		--build-arg TERRAFORM_VERSION=$(TERRAFORM_VERSION) \
+    --build-arg AZURE_CLI_VERSION=$(AZURE_CLI_VERSION) \
 		--tag $(DOCKER_IMAGE_TAG) \
 		.
 	@echo "$(BOLD)$(GREEN)Completed building docker image.$(RESET)"

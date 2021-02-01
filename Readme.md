@@ -17,16 +17,13 @@ Default Versions
 
 __COMMAND__
 ```
-$  make \
+$ make \
     STEP_1_IMAGE="golang:1.14.1-alpine3.11" \
     STEP_2_IMAGE="alpine:3.11" \
     TERRAFORM_VERSION=0.12.20 \
+    AZURE_CLI_VERSION=2.16.0 \
     docker-build
 ```
 
-Run Example
--------
-
-```
-  $
-```
+_CREDITS_
+This project is modeled after the excellent work by [@bryannice](https://github.com/bryannice)
