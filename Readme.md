@@ -26,6 +26,3 @@ $ make \
     AZURE_CLI_VERSION=2.16.0 \
     docker-build
 ```
-
----
-Project modeled after work done by [@bryannice](https://github.com/bryannice)

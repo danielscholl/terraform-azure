@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Initial Code
 
+> Initial Project modeled after work done by [@bryannice](https://github.com/bryannice)
+
 - Alpine Version set to 3.12
 - Golang Version set to 1.15.6
 - Terraform Version set to 0.14.5
