@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  pushCdBuildDockerImage:
+  dockerBuildPush:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -49,8 +49,8 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           repository: danielscholl/terraform-azure
           readme-filepath: Readme.md
-  logPullCdBuildDockerImage:
-    needs: pushCdBuildDockerImage
+  logDockerBuildPush:
+    needs: dockerBuildPush
     if: always()
     runs-on: ubuntu-latest
     steps:

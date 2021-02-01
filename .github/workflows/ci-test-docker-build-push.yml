@@ -1,4 +1,4 @@
-name: Push CI Build Test For Docker Image
+name: Test Docker Build and Push
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  pushCiBuildDockerImage:
+  dockerBuildPush:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -22,8 +22,8 @@ jobs:
             TERRAFORM_VERSION=0.14.5 \
             AZURE_CLI_VERSION=2.16.0 \
             docker-build
-  logPullCiBuildDockerImage:
-    needs: pushCiBuildDockerImage
+  logDockerBuildPush:
+    needs: dockerBuildPush
     if: always()
     runs-on: ubuntu-latest
     steps:
