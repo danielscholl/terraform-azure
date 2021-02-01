@@ -50,7 +50,7 @@ jobs:
           repository: danielscholl/terraform-azure
           readme-filepath: README.md
   logPullCdBuildDockerImage:
-    needs: pullCdBuildDockerImage
+    needs: pushCdBuildDockerImage
     if: always()
     runs-on: ubuntu-latest
     steps:
