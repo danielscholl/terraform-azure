@@ -2,7 +2,7 @@
 
 ![Docker Build and Push](https://github.com/danielscholl/terraform-azure/workflows/Docker%20Build%20and%20Push/badge.svg)
 
-A controlled secure alpine docker image with terraform and the azure cli. - [Alpine Linux](https://alpinelinux.org/).
+A controlled Alpine docker image with terraform and azure cli.
 
 Build
 ------
