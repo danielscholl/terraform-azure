@@ -66,7 +66,6 @@ RUN set -x \
   && python3 -m pip install --no-cache-dir azure-cli==${AZURE_CLI_VERSION} \
   && apk del build-dependencies \
   && rm -rf /var/cache/apk/* \
-  && rm /usr/bin/python \
   && ln -s /usr/bin/python3 /usr/bin/python
 
 # Create Terraform User
