@@ -38,7 +38,7 @@ jobs:
           echo ::set-output name=repo_name::$(echo ${GITHUB_REPOSITORY##*/})
       - name: Generate log file
         run: curl -v -L -u runner:${{ secrets.GITHUB_TOKEN }} -o build_logs.txt ${{ steps.job_info.outputs.log_url }}/logs
-     - name: Persisting log
+      - name: Persisting log
         id: persisting_log
         if: always()
         uses: actions/upload-artifact@v1
