@@ -1,4 +1,4 @@
-# alpine-terraform-azure
+# terraform-azure
 
 A minimal terraform and azure cli Docker image (~26mb) - [Alpine Linux](https://alpinelinux.org/).
 
