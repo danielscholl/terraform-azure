@@ -1,6 +1,6 @@
 # terraform-azure
 
-A minimal terraform and azure cli Docker image (~26mb) - [Alpine Linux](https://alpinelinux.org/).
+A controlled secure alpine docker image with terraform and the azure cli. - [Alpine Linux](https://alpinelinux.org/).
 
 Build
 ------
@@ -13,17 +13,17 @@ The make script will build the docker image. Arguments can be passed to the scri
 Default Versions
 
 - TERRAFORM_VERSION=0.14.5
-- AZURE_VERSION=
+- AZURE_VERSION=2.16.0
 
 __COMMAND__
 ```
 $ make \
-    STEP_1_IMAGE="golang:1.14.1-alpine3.11" \
-    STEP_2_IMAGE="alpine:3.11" \
-    TERRAFORM_VERSION=0.12.20 \
+    STEP_1_IMAGE="golang:1.15.6-alpine3.12" \
+    STEP_2_IMAGE="alpine:3.12" \
+    TERRAFORM_VERSION=0.14.5 \
     AZURE_CLI_VERSION=2.16.0 \
     docker-build
 ```
 
-_CREDITS_
-This project is modeled after the excellent work by [@bryannice](https://github.com/bryannice)
+---
+Project modeled after work done by [@bryannice](https://github.com/bryannice)
