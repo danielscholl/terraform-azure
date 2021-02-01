@@ -1,6 +1,6 @@
 # terraform-azure
 
-![Build](https://github.com/danielscholl/terraform-azure/workflows/Push%20CI%20Build%20Test%20For%20Docker%20Image/badge.svg)
+![Build](https://github.com/danielscholl/terraform-azure/workflows/Push%20CD%20Build%20For%20Docker%20Image/badge.svg)
 
 A controlled secure alpine docker image with terraform and the azure cli. - [Alpine Linux](https://alpinelinux.org/).
 
