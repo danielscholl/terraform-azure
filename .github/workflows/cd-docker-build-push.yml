@@ -27,7 +27,7 @@ jobs:
         id: build_terraform_docker_image
         uses: docker/build-push-action@v2
         with:
-          buil-args: |
+          build-args: |
             IMAGE_TAG=0.0.1
             STEP_1_IMAGE=golang:1.15.6-alpine3.12
             STEP_2_IMAGE=alpine:3.12
