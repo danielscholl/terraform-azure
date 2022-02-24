@@ -39,8 +39,8 @@ DOCKER_IMAGE_NAME := $(GIT_REPOSITORY_NAME)
 # Terraform Varibles
 # -----------------------------------------------------------------------------
 
-TERRAFORM_VERSION ?= 0.14.5
-AZURE_VERSION ?= 2.16.0
+TERRAFORM_VERSION ?= 1.1.6
+AZURE_VERSION ?= 2.31.0
 
 # -----------------------------------------------------------------------------
 # FUNCTIONS

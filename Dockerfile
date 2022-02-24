@@ -1,11 +1,11 @@
-ARG STEP_1_IMAGE=golang:1.15.6-alpine3.12
-ARG STEP_2_IMAGE=alpine:3.12
+ARG STEP_1_IMAGE=golang:1.17.7-alpine3.15
+ARG STEP_2_IMAGE=alpine:3.15
 ARG IMAGE_TAG=0.0.0
 
 FROM ${STEP_1_IMAGE} AS STEP_1
 
-ARG TERRAFORM_VERSION=0.14.5
-ARG AZURE_CLI_VERSION=2.16.0
+ARG TERRAFORM_VERSION=1.1.6
+ARG AZURE_CLI_VERSION=2.31.0
 
 ENV BUILD_PACKAGES \
   bash \
@@ -67,6 +67,9 @@ RUN set -x \
   && apk del build-dependencies \
   && rm -rf /var/cache/apk/* \
   && ln -s /usr/bin/python3 /usr/bin/python
+
+COPY terraform.sh /usr/local/bin/deploy
+RUN chmod 755 /usr/local/bin/deploy
 
 # Create Terraform User
 RUN addgroup -S terraform && adduser -S terraform -G terraform

@@ -14,15 +14,15 @@ The make script will build the docker image. Arguments can be passed to the scri
 
 Default Versions
 
-- TERRAFORM_VERSION=0.14.5
-- AZURE_VERSION=2.16.0
+- TERRAFORM_VERSION=1.1.6
+- AZURE_VERSION=2.31.0
 
 __COMMAND__
 ```
 $ make \
-    STEP_1_IMAGE="golang:1.15.6-alpine3.12" \
-    STEP_2_IMAGE="alpine:3.12" \
-    TERRAFORM_VERSION=0.14.5 \
-    AZURE_CLI_VERSION=2.16.0 \
+    STEP_1_IMAGE="golang:1.17.7-alpine3.15" \
+    STEP_2_IMAGE="alpine:3.15" \
+    TERRAFORM_VERSION=1.1.6 \
+    AZURE_CLI_VERSION=2.31.0 \
     docker-build
 ```
